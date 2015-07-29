@@ -1,0 +1,39 @@
+// Here are some suggestions for a logical system encompassing
+// more 'commas' than most other systems.  It classifies
+// intervals into seven broad groups: skhisma, kleisma, comma,
+// small diesis, great diesis, small semitone, and limma (from
+// smallest to largest).
+// 
+// Each interval is qualified by a pseudo-Latin term
+// indicating the exponent of 5 and its sign.
+// 
+// I don't particularly like these names, but the set of
+// these intervals in this lattice fell roughly into 11 groups
+// (based on the gaps in the graph of their cents-values),
+// which I condensed into these seven groups, to try to retain
+// familiar names without introducing new ones. I then devised
+// a logical system of qualification to accomodate the great
+// variety.  The stem '-pental' immediately betrays the
+// 5-limit dimensionality of these intervals, 'Pythagorean'
+// designating the ones that don't include 5 as a factor.
+// 
+// Suggested terminology for 5-limit intervals from 0 to 100 cents (read file)
+// with arbitrary boundaries of 3^-15...15 * 5^-7...7
+// by Joe Monzo 2000.1.11
+// ----------------------------------------------------------------
+// 
+// 
+// 
+// Joseph L. Monzo    Philadelphia     monz@juno.com
+// http://www.ixpres.com/interval/monzo/homepage.html
+
+@60
+
+:intervals
+
+261.6255653006
+261.6255653006
+275.62199471997
+265.19499215873
+270.69536599394
+266.7406479561

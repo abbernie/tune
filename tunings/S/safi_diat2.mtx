@@ -1,0 +1,17 @@
+// safi_diat2.scl
+// 
+// Safi al-Din's 2nd Diatonic, a 3/4 tone diatonic like Ptolemy's Equable Diatonic
+// 
+
+@60
+
+:intervals
+
+261.6255653006
+283.79722337692
+310.07474405997
+348.83408706747
+392.4383479509
+425.69583506538
+465.11211608996
+523.2511306012

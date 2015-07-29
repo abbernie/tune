@@ -1,0 +1,26 @@
+// Boomsliter.scl
+// 
+// Boomsliter & Creel basic set of their referential tuning.
+// 
+// For major melodies, transpose it 4 times by 3/2. For minor, transposeit first
+// by 6/5 then this transposed set 3 more times by 3/2. For Blues, the initial
+// transposition is by 5/4, then a chain of 3 3/2's. 3 more levels by 3/2's are
+// optional
+
+@60
+
+:intervals
+
+261.6255653006
+294.32876096318
+305.22982618403
+313.95067836072
+327.03195662575
+348.83408706747
+366.27579142084
+392.4383479509
+418.60090448096
+436.04260883433
+457.84473927605
+470.92601754108
+523.2511306012

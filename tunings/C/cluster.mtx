@@ -1,0 +1,28 @@
+// cluster.scl
+// 
+// 13-tone 5-limit Tritriadic Cluster
+// 
+// This set of notes is sufficient to play all 8 species of the Ellis Trichordals
+// (ma.ma.ma. through mi.mi.mi.) of the 3 types, D->T, M->T, and D->M with 1/1 asa
+// common tonic. By modal rotation, all 56 modes of each type are playable. The
+// D->M contain 2 each of 6,7,and 8 tone scales; the other type only 7 tone scale.
+// For further symmetry, add 25/18 to make 14 tones.
+
+@60
+
+:intervals
+
+261.6255653006
+272.52663052146
+294.32876096318
+313.95067836072
+327.03195662575
+348.83408706747
+376.74081403286
+392.4383479509
+408.78994578219
+418.60090448096
+436.04260883433
+470.92601754108
+490.54793493862
+523.2511306012

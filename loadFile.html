@@ -1,0 +1,30 @@
+<html>
+  <head>
+
+  	<script src="jquery.js"></script>
+
+  </head>
+  <body>
+	<script>
+
+		var loadFile = function(name) {
+
+			var letter = name.split("")[0].toUpperCase()
+
+			$.get("tunings/"+letter+"/"+name+".mtx",function(d) {
+				var text = d.split("\n")
+				var freqs = []
+				for (var i = 0; i < text.length; i++ ) {
+					if (text[i] == parseFloat(text[i])) {
+						freqs.push(parseFloat(text[i]));
+					}
+				}
+			})
+
+		}
+
+		loadFile("zarlino2")
+
+	</script>
+  </body>
+</html>

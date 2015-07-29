@@ -1,0 +1,13 @@
+// temp3ebt.scl
+// 
+// Cycle of 3 equal beating thirds
+// 
+
+@60
+
+:intervals
+
+261.6255653006
+330.24866439584
+416.02753826489
+523.2511306012

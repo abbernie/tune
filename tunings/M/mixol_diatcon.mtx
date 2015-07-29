@@ -1,0 +1,17 @@
+// mixol_diatcon.scl
+// 
+// A Mixolydian Diatonic with its own trite synemmenon replacing paramese
+// 
+
+@60
+
+:intervals
+
+261.6255653006
+281.75060878526
+305.22982618403
+332.97799220076
+392.4383479509
+406.97310157871
+457.84473927605
+523.2511306012

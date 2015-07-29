@@ -1,0 +1,18 @@
+// dudon_diat.scl
+// 
+// Dudon Neutral Diatonic
+// 
+// Obtained by taking mediants of each term of the major and minor modes
+
+@60
+
+:intervals
+
+261.6255653006
+294.32876096318
+321.08592105074
+350.8160989258
+392.4383479509
+428.11456140098
+481.6288815761
+523.2511306012

@@ -1,0 +1,17 @@
+// chin_yunlo.scl
+// 
+// Observed tuning from Chinese gong-chime (yün-lo), Helmholtz/Ellis p. 518, nr.106
+// 
+
+@60
+
+:intervals
+
+261.6255653006
+288.45311779165
+323.40385076956
+367.0144478307
+386.1523605003
+409.35055662695
+483.1608380663
+525.67465946865

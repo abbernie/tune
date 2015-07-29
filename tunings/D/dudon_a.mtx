@@ -1,0 +1,18 @@
+// dudon_a.scl
+// 
+// Dudon Tetrachord A
+// 
+// From Jacques Dudon, an Islamic or "Mohajira" type
+
+@60
+
+:intervals
+
+261.6255653006
+285.85015468029
+319.76457981184
+348.83408706747
+392.4383479509
+428.77523202043
+479.64686971777
+523.2511306012

@@ -1,0 +1,26 @@
+// parizek_7lqmtd2.scl
+// June 2004 - Petr Parizek
+// Use SET MIDDLE 62
+// To tune the scale by ear, please choose the intervals in this order:
+// D-F#, D-Bb, Bb-F, Bb-G#, G#-C#, C#-A, A-E, E-C, F#-Eb, Eb-G, G-B.
+// 
+// 7-limit Quasi-meantone no. 2 (1/1 is D)
+// 
+
+@60
+
+:intervals
+
+261.6255653006
+280.31310567921
+293.02063313667
+313.95067836072
+327.03195662575
+350.39138209902
+366.27579142084
+390.69417751556
+418.60090448096
+437.98922762377
+468.83301301868
+488.36772189445
+523.2511306012
