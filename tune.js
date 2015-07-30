@@ -1,12 +1,12 @@
 function Tune(){
 
-	this.scale = [1/1,11/10,5/4,4/3,3/2,5/3,7/4,2/1]
-	this.key = 60;
+	this.scale = []
+	this.key = this.setkey(60)
 
 }
 
-Tune.prototype.retune = function(input){
-2
+Tune.prototype.tune = function(input){
+
 	var base = 440 * Math.pow(2,(this.key-69)/12)
 
 	var scaleDegree = (input - this.key)%this.scale.length
@@ -15,5 +15,28 @@ Tune.prototype.retune = function(input){
 	console.log("degree", scaleDegree)
 	return base*this.scale[scaleDegree]
 
+}
+
+Tune.prototype.setkey = function(key){
+	this.key = key;
+}
+
+Tune.prototype.loadscale = function(name){
+	this.scale = []
+	var letter = name.split("")[0].toUpperCase()
+
+			$.get("tunings/"+letter+"/"+name+".mtx",function(d) {
+				var text = d.split("\n")
+				var freqs = []
+				
+				for (var i = 0; i < text.length; i++ ) {
+					if (text[i] == parseFloat(text[i])) {
+						freqs.push(parseFloat(text[i]));
+						this.scale.push(freqs[freqs.length-1]/freqs[0])
+					}
+				}
+				this.tune(60)
+				console.log(this.scale)
+			}.bind(this))
 }
 
