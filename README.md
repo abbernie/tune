@@ -16,10 +16,10 @@ Download tune.js and include it in a script tag at the top of your page.
 </head>
 ```
 
-Create a Tune.js instance, specifying the Audio Context as a creation argument.
+Create a Tune.js instance.
 
 ```js
-var tune = new Tune(audioContext);
+var tune = new Tune();
 ```
 
 Load your scale of choice with the ```js loadscale('scale-name') ``` method.
