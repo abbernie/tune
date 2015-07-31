@@ -31,9 +31,12 @@ Tune.prototype.frequency = function(input) {
 
 	var base = 440 * Math.pow(2,(this.key-69)/12)
 
-	var scaleDegree = (input - this.key)%this.scale.length
-
+	// what octave is our input
 	var octave = Math.floor((input-this.key)/this.scale.length)
+
+	// which scale degree (0 - scale length) is our input
+	var scaleDegree = (input - this.key)
+	scaleDegree = ( scaleDegree + 160 ) % this.scale.length
 
 	var freq = base*this.scale[scaleDegree]
 	
@@ -68,6 +71,8 @@ Tune.prototype.MIDI = function(input) {
 	var newvalue = this.frequency(input);
 
 	var n = 69 + 12*Math.log(newvalue/440)/Math.log(2)
+
+	n = Math.floor(n*1000000000)/1000000000
 
 	return n
 
