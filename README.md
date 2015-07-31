@@ -22,21 +22,21 @@ Create a Tune.js instance.
 var tune = new Tune();
 ```
 
-Load your scale of choice with the ```js loadscale('scale-name') ``` method.
+Load your scale of choice with the ```loadscale('scale-name') ``` method.
 
 ```js
 tune.loadscale('mean19');
 ```
 
-Pass MIDI note numbers to the ```js tune() ``` method. ```js tune(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```js tune() ``` to set the frequency of an oscillator.
+Pass MIDI note numbers to the ```note() ``` method. ```note(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
 
 ```js
-osc.frequency.value = tune.tune(60);
+osc.frequency.value = tune.note(60);
 ```
 
 ### Controls
 
-You can set the key and base frquency of a scale with the ```js setkey(midi-note-#) ``` method.
+You can set the key and base frquency of a scale with the ```setkey(midi-note-#) ``` method.
 
 ```js
 //sets the base frequency to G4 or 392Hz
