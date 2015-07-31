@@ -36,21 +36,10 @@ Tune.prototype.setkey = function(key){
 }
 
 Tune.prototype.loadscale = function(name){
+	var freqs = TuningList[name].frequencies
 	this.scale = []
-	var letter = name.split("")[0].toUpperCase()
-
-			$.get("tunings/"+letter+"/"+name+".mtx",function(d) {
-				var text = d.split("\n")
-				var freqs = []
-				
-				for (var i = 0; i < text.length; i++ ) {
-					if (text[i] == parseFloat(text[i])) {
-						freqs.push(parseFloat(text[i]));
-						this.scale.push(freqs[freqs.length-1]/freqs[0])
-					}
-				}
-				this.tune(60)
-				console.log(this.scale)
-			}.bind(this))
+	for (var i=0;i<freqs.length;i++)
+		this.scale.push(freqs[i]/freqs[0])
+	this.tune(60)
+	console.log(this.scale)
 }
-
