@@ -1,11 +1,23 @@
 function Tune(){
 
 	this.scale = []
-	this.key = this.setkey(60)
+	this.key = 60
 	this.mode = {
 		output: "frequency",
 		input: "MIDI"
-	};
+	}
+	this.etmajor = [ 261.62558,
+		293.664764,
+		329.627563,
+		349.228241,
+		391.995422,
+		440,
+		493.883301,
+		523.25116
+	]
+	this.middleC = 60;
+	this.rootFreq = 440 * Math.pow(2,(60-69)/12);
+	console.log("{{{{ Tune.js v0.1 Loaded }}}}");
 
 }
 
@@ -78,15 +90,85 @@ Tune.prototype.MIDI = function(input) {
 
 }
 
-Tune.prototype.setkey = function(key){
+Tune.prototype.setKey = function(key){
 	this.key = key
 	return this.key
 }
 
-Tune.prototype.loadscale = function(name){
+Tune.prototype.loadScale = function(name){
 	var freqs = TuningList[name].frequencies
 	this.scale = []
 	for (var i=0;i<freqs.length;i++) {
 		this.scale.push(freqs[i]/freqs[0])
 	}
+	console.log(" ");
+	console.log("LOADED "+name);
+	console.log(TuningList[name].description);
+	console.log(this.scale);
+	// VIS
+	// this scale vis
+	var vis = [];
+	for (var i=0;i<100;i++) {
+		vis[i] = " ";
+	}
+	for (var i=0;i<this.scale.length;i++) {
+		var spot = Math.round(this.scale[i] * 100 - 100);
+		if (i<10) {
+			vis.splice(spot,1,i+1);
+		} else {
+			vis.splice(spot,5,i+1);
+		}
+	}
+	var textvis = "";
+	for (var i=0;i<vis.length;i++) {
+		textvis += vis[i];
+	}
+	console.log(name)
+	console.log(textvis)
+	// ET scale vis
+	var vis = [];
+	for (var i=0;i<100;i++) {
+		vis[i] = " ";
+	}
+	for (var i=0;i<this.etmajor.length;i++) {
+		var spot = Math.round(this.etmajor[i]/this.etmajor[0] * 100 - 100);
+		if (i<10) {
+			vis.splice(spot,1,i+1);
+		} else {
+			vis.splice(spot,5,i+1);
+		}
+		
+	}
+	var textvis = "";
+	for (var i=0;i<vis.length;i++) {
+		textvis += vis[i];
+	}
+	console.log(textvis)
+	console.log("equal-tempered major (reference)")
+
+}
+
+Tune.prototype.search = function(letters) {
+	var possible = []
+	for (var key in TuningList) {
+		if (key.toLowerCase().indexOf(letters.toLowerCase())!=-1) {
+			possible.push(key)
+		}
+	}
+	return possible
+}
+
+Tune.prototype.chord = function(midis) {
+	var output = []
+	for (var i=0;i<midis.length;i++) {
+		output.push(this.note(midis[i]))
+	}
+	return output;
+}
+
+Tune.prototype.root = function(newmidi, newfreq) {
+	this.middleC = newmidi
+	this.rootFreq = newfreq
+	// not working now ... needs much work.
+	// setKey is not transposing now, either.
 }
