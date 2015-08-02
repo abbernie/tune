@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    	<script type="text/javascript" src="tunings.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    </head>
+    <style>
+   #title{
+    padding:100px;
+    text-align:center;
+    font-family:"Josefin Sans";
+    font-size: 32pt;
+
+   }
+
+    #scale-list{
+        font-family:"Josefin Sans";
+        text-align: center;
+    }
+
+    #name{
+        font-weight:bold;
+        float:left;
+        padding:40px;
+        font-size:18pt;
+    }
+
+    #description{
+        font-weight:lighter;
+        float:left;
+        padding:40px;
+        font-weight: 14px
+    }
+    #scale{
+        overflow:auto;
+    }
+
+    </style>
+    <body>
+        <div id="title"> Tune.js List of Scales</div>
+        <div ng-app="app" ng-controller="ctrl">
+            
+            <!--
+            <div id="nav">
+                <div> first 1000</div>
+                <div> next 1000</div>
+                <div> next 1000</div>
+                <div> last 1000</div>
+            </div>
+        -->
+            
+            <table id="scale-list">
+                <tr id="scale" ng-repeat="(scale, description) in scales">
+                   
+                    <td id="name">{{scale}}</td>
+                    <td id="description">{{description.description}}</td>
+                   
+                </tr>
+            </table>
+    	
+        </div>
+    </body>
+    <script>
+    
+  //  var scales = Object.keys(TuningList);
+    console.log(TuningList);
+    
+    var app = angular.module('app',[]);
+   
+    app.controller('ctrl', function($scope){
+        $scope.scales = TuningList;
+    });
+
+    /*
+
+    
+	
+    console.log(TuningList);
+
+    var list = document.getElementById("scale-list");
+    var d = document.getElementById("description");
+
+    for(var key in TuningList){
+        var text = document.createTextNode(key);
+        var description = document.createTextNode(TuningList[key].description);
+        var lineBreak = document.createElement("br");
+        var lineBreak1 = document.createElement("br");
+        var lineBreak2 = document.createElement("br");
+        
+        list.appendChild(text);
+        list.appendChild(lineBreak);
+        list.appendChild(description);
+        list.appendChild(lineBreak1);
+        list.appendChild(lineBreak2);
+    }
+	
+	*/
+    </script>
+   
+</html>

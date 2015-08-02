@@ -1,17 +1,51 @@
 <html>
   <head>
 
-  	<script src="jquery.js"></script>
   	<script src="tunings.js"></script>
   	<script src="tune.js"></script>
+    <script type="text/javascript" src="node_modules/tone/build/Tone.js"></script>
 
   </head>
   <body>
 	<script>
 
-		var tune = new Tune()
-		tune.loadscale("ptolemy")
-    tune.mode.output = "ratio"
+		var tune = new Tune();
+		tune.loadscale("ji_21");
+    console.log(tune.scale);
+
+    var synth = new Tone.SimpleSynth({
+      envelope: {
+            attack: 5,
+            decay: 2,
+            sustain:1,
+            release:3
+          }
+        });
+
+    synth.oscillator = 'triangle';
+    synth.toMaster();
+
+    var MIDInote = 60;
+
+    var clock = new Tone.Clock(0.5, function(time){
+    
+    var note = tune.note(MIDInote);
+  
+    synth.triggerAttackRelease(note, 5);
+    
+    console.log(note);
+    MIDInote++;
+    
+    if(MIDInote > 81){
+      MIDInote = 60;
+    }
+
+});
+
+    clock.start();
+
+
+    
 
 	</script>
   </body>
