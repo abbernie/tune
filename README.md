@@ -58,7 +58,7 @@ tune.setKey(67);
 | couperin | Couperin modified meantone |
 | helmholtz_pure | Helmholtz's two-keyboard harmonium tuning untempered |
 | partch_43 | Harry Partch's 43-tone pure scale |
-| johnston_81 | Johnston 81-note 5-limit scale of Sonata for Microtonal Piano |
+| johnston_81 | Ben Johnston's 81-note 5-limit scale of Sonata for Microtonal Piano |
 | xenakis_chrom | Xenakis's Byzantine Liturgical mode, 5 + 19 + 6 parts |
 | slendro | Observed Javanese Slendro scale, Helmholtz/Ellis p. 518, nr.94 |
 | harrison_5 | From Lou Harrison, a pelog style pentatonic |
