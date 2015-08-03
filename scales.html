@@ -2,22 +2,26 @@
 <html>
     <head>
     	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    	<script type="text/javascript" src="tunings.js"></script>
+    	<script type="text/javascript" src="lctunings.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
     </head>
     <style>
-        #title {
-            padding:100px 100px 50px;
-            text-align:center;
+
+        body {
             font-family:"Josefin Sans";
+        }
+
+        #title {
+            padding:70px 0px 30px;
+            text-align:center;
+            
             font-size: 32pt;
 
         }
 
         #scale-list {
-            font-family:"Josefin Sans";
             text-align: left;
-            max-width:900px;
+            width:900px;
             margin:0 auto;
             border-spacing:0px;
         }
@@ -41,10 +45,78 @@
             background-color: #f7f7f7;
         }
 
+        /* menu */
+
+        #menu {
+            max-width:900px;
+            margin:0px auto;
+            text-align:center;
+        }
+
+        #menu input {
+            border-radius:0px;
+            border:solid 1px black;
+            background-color:#fff;
+            outline:none;
+            padding:3px;
+            font-size:14pt;
+            display:block;
+            margin:0 auto 30px;
+            width:300px;
+        }
+
+        #menu a {
+            color:#1bd;
+            text-decoration:none;
+            padding:0px 5px;
+            display:block;
+            cursor:pointer;
+            font-size:12pt;
+            float:left;
+        }
+
+        #menu a:hover {
+            text-decoration:underline;
+        }
+
     </style>
     <body>
         <div id="title"> Tune.js List of Scales</div>
         <div ng-app="app" ng-controller="ctrl">
+
+            <div id="menu">
+
+                <input type="text" placeholder="Search Tunings" ng-keyup="searchTunings($event)">
+
+                <a ng-click="searchTunings('')">All</a>
+                <a ng-click="searchTunings('a')">A</a>
+                <a ng-click="searchTunings('b')">B</a>
+                <a ng-click="searchTunings('c')">C</a>
+                <a ng-click="searchTunings('d')">D</a>
+                <a ng-click="searchTunings('e')">E</a>
+                <a ng-click="searchTunings('f')">F</a>
+                <a ng-click="searchTunings('g')">G</a>
+                <a ng-click="searchTunings('h')">H</a>
+                <a ng-click="searchTunings('i')">I</a>
+                <a ng-click="searchTunings('j')">J</a>
+                <a ng-click="searchTunings('k')">K</a>
+                <a ng-click="searchTunings('l')">L</a>
+                <a ng-click="searchTunings('m')">M</a>
+                <a ng-click="searchTunings('n')">N</a>
+                <a ng-click="searchTunings('o')">O</a>
+                <a ng-click="searchTunings('p')">P</a>
+                <a ng-click="searchTunings('q')">Q</a>
+                <a ng-click="searchTunings('r')">R</a>
+                <a ng-click="searchTunings('s')">S</a>
+                <a ng-click="searchTunings('t')">T</a>
+                <a ng-click="searchTunings('u')">U</a>
+                <a ng-click="searchTunings('v')">V</a>
+                <a ng-click="searchTunings('w')">W</a>
+                <a ng-click="searchTunings('x')">X</a>
+                <a ng-click="searchTunings('y')">Y</a>
+                <a ng-click="searchTunings('z')">Z</a>
+
+            </div>
             
             <!--
             <div id="nav">
@@ -77,8 +149,22 @@
     var app = angular.module('app',[]);
    
     app.controller('ctrl', function($scope){
-        $scope.scales = TuningList;
+        $scope.searchFish = '';     // set the default search/filter term
+        $scope.scales = TuningList
+        $scope.searchTunings = function(arg) {
+            if (arg.target) {
+                arg = arg.target.value
+            }
+            $scope.scales = {}
+            for (var key in TuningList) {
+                if (key.indexOf(arg.toLowerCase())==0) {
+                    $scope.scales[key] = TuningList[key]
+                }
+            }
+        }
     });
+
+
 
     /*
 
