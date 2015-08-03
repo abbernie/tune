@@ -51,7 +51,7 @@ tune.setKey(67);
 
 | Name | Description |
 |------|-------------|
-| ji_12 | Basic JI with 7-limit tritone |
+| ji_12 | Basic just instonation with 7-limit tritone |
 | harm30 | First 30 harmonics and subharmonics |
 | pyth_31 | 31-tone Pythagorean scale |
 | ptolemy | Intense Diatonic Syntonon, also Zarlino's scale |
