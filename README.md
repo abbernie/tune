@@ -26,10 +26,10 @@ Create a Tune.js instance.
 var tune = new Tune();
 ```
 
-Load your scale of choice with the ```loadscale('scale-name') ``` method.
+Load your scale of choice with the ```loadScale('scale-name') ``` method.
 
 ```js
-tune.loadscale('mean19');
+tune.loadScale('mean19');
 ```
 
 Pass MIDI note numbers to the ```note() ``` method. ```note(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
@@ -40,17 +40,18 @@ osc.frequency.value = tune.note(60);
 
 ### Controls
 
-You can set the key and base frquency of a scale with the ```setkey(midi-note-#) ``` method.
+You can set the key and base frquency of a scale with the ```setKey(midi-note-#) ``` method.
 
 ```js
 //sets the base frequency to G4 or 392Hz
-tune.setkey(67);
+tune.setKey(67);
 ```
 
 ### Example Tunings
 
 | Name | Description |
 |------|-------------|
+| ji_12 | Basic JI with 7-limit tritone |
 | harm30 | First 30 harmonics and subharmonics |
 | pyth_31 | 31-tone Pythagorean scale |
 | ptolemy | Intense Diatonic Syntonon, also Zarlino's scale |
@@ -61,6 +62,7 @@ tune.setkey(67);
 | xenakis_chrom | Xenakis's Byzantine Liturgical mode, 5 + 19 + 6 parts |
 | slendro | Observed Javanese Slendro scale, Helmholtz/Ellis p. 518, nr.94 |
 | harrison_5 | From Lou Harrison, a pelog style pentatonic |
+| malkauns | Mode of Indian Raga Malkauns, inverse of prime_5 |
 
 ![BigP](http://www.mathopenref.com/images/bioimages/pythagoras1.jpg)
 ![BigZ](https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gioseffo_Zarlino.jpg/200px-Gioseffo_Zarlino.jpg)
