@@ -4,7 +4,11 @@
 
 **Overview:** Tune.js is a web audio tuning library of microtonal and just intonation scales.
 
-Tune.js supports over 3,500 historical tunings and temperaments, ported from Microtuner TIDoc files [compiled and documented by Victor Cerullo from 2003-2010](http://www.venetica.net/Sites/16tone/mtx_file_specs.htm)
+Tune.js supports over 3,000 historical tunings and temperaments, ported from Microtuner TIDoc files [compiled and documented by Victor Cerullo from 2003-2010](http://www.venetica.net/Sites/16tone/mtx_file_specs.htm).
+
+[List of Tunings](http://abbernie.github.io/tune/scales.html)
+
+[Demo](http://abbernie.github.io/tune/demo.html)
 
 ### How to Use Tune.js
 
@@ -43,12 +47,20 @@ You can set the key and base frquency of a scale with the ```setkey(midi-note-#)
 tune.setkey(67);
 ```
 
+### Example Tunings
 
-### Demo
-
-[Tune.js Demo](http://abbernie.github.io/tune)
-
-##### Endnote
+| Name | Description |
+|------|-------------|
+| harm30 | First 30 harmonics and subharmonics |
+| pyth_31 | 31-tone Pythagorean scale |
+| ptolemy | Intense Diatonic Syntonon, also Zarlino's scale |
+| couperin | Couperin modified meantone |
+| helmholtz_pure | Helmholtz's two-keyboard harmonium tuning untempered |
+| partch_43 | Harry Partch's 43-tone pure scale |
+| johnston_81 | Johnston 81-note 5-limit scale of Sonata for Microtonal Piano |
+| xenakis_chrom | Xenakis's Byzantine Liturgical mode, 5 + 19 + 6 parts |
+| slendro | Observed Javanese Slendro scale, Helmholtz/Ellis p. 518, nr.94 |
+| harrison_5 | From Lou Harrison, a pelog style pentatonic |
 
 ![BigP](http://www.mathopenref.com/images/bioimages/pythagoras1.jpg)
 ![BigZ](https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gioseffo_Zarlino.jpg/200px-Gioseffo_Zarlino.jpg)
