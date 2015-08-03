@@ -6,35 +6,40 @@
         <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
     </head>
     <style>
-   #title{
-    padding:100px;
-    text-align:center;
-    font-family:"Josefin Sans";
-    font-size: 32pt;
+        #title {
+            padding:100px 100px 50px;
+            text-align:center;
+            font-family:"Josefin Sans";
+            font-size: 32pt;
 
-   }
+        }
 
-    #scale-list{
-        font-family:"Josefin Sans";
-        text-align: center;
-    }
+        #scale-list {
+            font-family:"Josefin Sans";
+            text-align: left;
+            max-width:900px;
+            margin:0 auto;
+            border-spacing:0px;
+        }
 
-    #name{
-        font-weight:bold;
-        float:left;
-        padding:40px;
-        font-size:18pt;
-    }
+        #name, #description {
+            font-weight:normal;
+            padding:20px 10px;
+            font-size:14pt;
+            border-bottom:solid 1px #ddd;
+        }
 
-    #description{
-        font-weight:lighter;
-        float:left;
-        padding:40px;
-        font-weight: 14px
-    }
-    #scale{
-        overflow:auto;
-    }
+        #name {
+            font-weight:bold;
+        }
+        #scale {
+            overflow:auto;
+        }
+
+        #columnnames {
+            border:solid 1px #ddd;
+            background-color: #f7f7f7;
+        }
 
     </style>
     <body>
@@ -51,6 +56,12 @@
         -->
             
             <table id="scale-list">
+                <tr id="columnnames">
+                   
+                    <td id="name">Name</td>
+                    <td id="description">Description</td>
+                   
+                </tr>
                 <tr id="scale" ng-repeat="(scale, description) in scales">
                    
                     <td id="name">{{scale}}</td>
@@ -62,9 +73,6 @@
         </div>
     </body>
     <script>
-    
-  //  var scales = Object.keys(TuningList);
-    console.log(TuningList);
     
     var app = angular.module('app',[]);
    
