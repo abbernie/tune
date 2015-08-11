@@ -79,7 +79,7 @@
 
         <canvas nx="keyboard" id="keyboard"></canvas>
         <div id="key">
-          <p> Press the Q key to dynamically reset the key to left note played</p>
+          <p> Press the Q key to dynamically reset the key to last note played</p>
         </div>
       </div>
 
@@ -129,7 +129,7 @@
 
   nx.onload = function(){
     
-    keyboard.octaves = 4;
+    keyboard.octaves = 2;
     //keyboard.midibase = 60;
     keyboard.init();
 
@@ -150,7 +150,16 @@
     select1.on('*',function(){
       var scale = select1.val.text;
       tune.loadScale(scale);
-
+      var pattern = [];
+      for(var i = 0; i < tune.scale.length; i++){
+        if(i%2 == 0){
+          pattern[i] = 'w';
+        } else{
+          pattern[i] = 'b';
+        }
+      }
+      keyboard.keypattern = pattern;
+      keyboard.init();
     });
 
   }
