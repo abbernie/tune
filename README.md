@@ -39,7 +39,7 @@ osc.frequency.value = tune.note(60);
 ```
 ### Properties
 
-## Tune.mode
+#### Tune.mode
 
 Set the output mode of a Tune instance. Choose between 'frequency' (outputs hertz value), 'ratio'(outputs float value), or 'MIDI' (outputs MIDI float value). The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
 
@@ -48,7 +48,7 @@ Set the output mode of a Tune instance. Choose between 'frequency' (outputs hert
 tune.mode.output = 'ratio';
 ```
 
-## Tune.key
+#### Tune.key
 
 Returns the current key of a Tune instance. To set the key of a Tune instance use the ```setKey()``` method. The default key is set to 60 (middle C).
 
@@ -56,7 +56,7 @@ Returns the current key of a Tune instance. To set the key of a Tune instance us
 var myKey = tune.key;
 ```
 
-## Tune.scale
+#### Tune.scale
 
 Read only. An array containing the ratio values of the current scale loaded with the ```loadScale()``` method.
 
@@ -67,7 +67,7 @@ var scaleLength = tune.scale.length;
 
 ### Methods
 
-## Tune.note(midi-note-#)
+#### Tune.note(midi-note-#)
 
 Returns a microtonally tune MIDI note. Accepts MIDI integers. Depending on the output mode the note method returns a frequency value in hertz (e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4).
 
@@ -76,7 +76,7 @@ Returns a microtonally tune MIDI note. Accepts MIDI integers. Depending on the o
 var note = tune.note(67);
 ```
 
-## Tune.setKey(midi-note-#)
+#### Tune.setKey(midi-note-#)
 
 Sets the key and base frquency of a scale with the ```setKey(midi-note-#) ``` method.
 
@@ -85,7 +85,7 @@ Sets the key and base frquency of a scale with the ```setKey(midi-note-#) ``` me
 tune.setKey(67);
 ```
 
-## Tune.chord([array-of-midi-note-#s])
+#### Tune.chord([array-of-midi-note-#s])
 
 Plays an array of notes.
 
@@ -95,7 +95,7 @@ var myMicrotonalChord = [60,67,71];
 tune.chord(myMicrotonalChord);
 ```
 
-## Tune.search("string")
+#### Tune.search("string")
 
 Searches through the scale archive for scales that match the query.
 
