@@ -33,6 +33,13 @@
             border-bottom:solid 1px #ddd;
         }
 
+        #length {
+            font-weight:normal;
+            padding:20px 80px;
+            font-size:14pt;
+            border-bottom:solid 1px #ddd;
+        }
+
         #name {
             font-weight:bold;
         }
@@ -68,7 +75,7 @@
         #menu a {
             color:#1bd;
             text-decoration:none;
-            padding:0px 5px;
+            padding:0px 11px;
             display:block;
             cursor:pointer;
             font-size:12pt;
@@ -118,27 +125,22 @@
 
             </div>
             
-            <!--
-            <div id="nav">
-                <div> first 1000</div>
-                <div> next 1000</div>
-                <div> next 1000</div>
-                <div> last 1000</div>
-            </div>
-        -->
-            
             <table id="scale-list">
                 <tr id="columnnames">
                    
                     <td id="name">Name</td>
                     <td id="description">Description</td>
+                    <td id="length">Length</td>
                    
                 </tr>
                 <tr id="scale" ng-repeat="(scale, description) in scales">
-                   
+                  
+                    
                     <td id="name">{{scale}}</td>
                     <td id="description">{{description.description}}</td>
+                    <td id="length">{{description.frequencies.length-1}}</td>
                    
+                
                 </tr>
             </table>
     	
@@ -151,6 +153,7 @@
     app.controller('ctrl', function($scope){
         $scope.searchFish = '';     // set the default search/filter term
         $scope.scales = TuningList
+        console.log(TuningList)
         $scope.searchTunings = function(arg) {
             if (arg.target) {
                 arg = arg.target.value
