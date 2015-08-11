@@ -4,45 +4,163 @@
   	<script src="tunings.js"></script>
   	<script src="tune.js"></script>
     <script type="text/javascript" src="node_modules/tone/build/Tone.js"></script>
+    <script type="text/javascript" src="js/nexusUI.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
   </head>
-  <body>
-	<script>
+  <style>
 
-		var tune = new Tune();
-		tune.loadscale("ji_21");
-    console.log(tune.scale);
+    body{
+      font-family: 'Josefin Sans';
+    }
+    h1{
+      display:block;
+      font-weight:bold;
+      margin:0px auto;
+      padding:30px;
+      font-size:32pt;
+      text-align:center;
+      background-color: #f9f9f9;
+      border-radius: 10px;
 
-    var synth = new Tone.SimpleSynth({
-      envelope: {
-            attack: 5,
-            decay: 2,
-            sustain:1,
-            release:3
-          }
-        });
-
-    synth.oscillator = 'triangle';
-    synth.toMaster();
-
-    var MIDInote = 60;
-
-    var clock = new Tone.Clock(0.5, function(time){
-    
-    var note = tune.note(MIDInote);
-  
-    synth.triggerAttackRelease(note, 5);
-    
-    console.log(note);
-    MIDInote++;
-    
-    if(MIDInote > 81){
-      MIDInote = 60;
     }
 
-});
+    #keyboard{
+      display:block;
+      margin:10px auto;
+      width:500px;
+      height:200px;
+    }
 
-    clock.start();
+    #scales{
+      display:block;
+      margin:0px auto;
+      padding:10px;
+      font-weight:lighter;
+      text-align: center;
+      font-size:18pt;
+    }
+
+    #scales p {
+      padding:10px;
+    }
+
+    #key{
+      display:block;
+      margin:10px auto;
+      padding:10px 10px;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color:#1bd;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
+
+    #container{
+      background-color: #fafafa;
+      box-shadow: 0px 2px #eee;
+      padding:30px;
+      border-radius: 10px;
+    }
+
+  </style>
+  <body>
+
+    <a href="https://github.com/abbernie"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+
+    <h1>Tune.js Demo</h1>
+    <div id="container">
+      <div id="key-wrapper">
+
+        <canvas nx="keyboard" id="keyboard"></canvas>
+        <div id="key">
+          <p> Press the Q key to dynamically reset the key to left note played</p>
+        </div>
+      </div>
+
+      
+        <div id="scales">
+          <p>Scale Choices</p>
+          <canvas nx="select" choices="ji_12,harm30,pyth_31,partch_43,johnston_81,xenakis_chrom,ptolemy,helmholtz_pure,05-19,couperin"></canvas>
+          <p> Explore all ~3500 available scales in the <a href="scales.html">Scale Archive</a></p>
+        </div>
+   </div>
+    
+
+    
+	<script>
+
+  //Create and load a microtonal scale 
+  var tune = new Tune();
+  tune.loadScale("ji_12");
+  console.log(tune.key);
+  var midi = tune.key;
+
+  document.onkeypress = function(e){
+    console.log(e.which);
+    if(e.which == 113){
+      console.log("hey!",midi);
+       tune.setKey(midi);
+      console.log("key set to ", midi)
+    }
+
+  }
+  
+  //Create a synthesizer and set it's properties
+  var synth = new Tone.PolySynth(8, Tone.SimpleSynth).toMaster();
+  
+  synth.set({
+    envelope:{
+        attackCurve:"linear",
+        attack:.1,
+        decay:1,
+        susatain:1,
+        release:1
+      },
+      filter: {
+        type:"allpass"
+      }
+    });
+
+  nx.onload = function(){
+    
+    keyboard.octaves = 4;
+    //keyboard.midibase = 60;
+    keyboard.init();
+
+    keyboard.on('*', function(data){
+     
+      midi = data.note;
+      console.log("midi",midi);
+      var note = tune.note(midi);
+      console.log(note);
+      if(data.on > 0){
+        synth.triggerAttack(note);
+      } else if (data.on == 0){
+        synth.triggerRelease(note);
+      }
+     // clock.start();
+         });
+
+    select1.on('*',function(){
+      var scale = select1.val.text;
+      tune.loadScale(scale);
+
+    });
+
+  }
+
+ 
+
+
+
+
+
 
 
 	</script>
