@@ -42,20 +42,21 @@ Tune.prototype.note = function(input){
 Tune.prototype.frequency = function(input) {
 
 	var base = 440 * Math.pow(2,(this.key-69)/12)
-
+	
 	// what octave is our input
 	var octave = Math.floor((input-this.key)/this.scale.length)
-
+	
 	// which scale degree (0 - scale length) is our input
 	var scaleDegree = (input - this.key)
-	scaleDegree = ( scaleDegree + 160 ) % this.scale.length
 
+	scaleDegree =  (scaleDegree+this.scale.length*5) % this.scale.length
+	
 	var freq = base*this.scale[scaleDegree]
 	
 	freq = freq*(Math.pow(2,octave))
-
+	
 	freq = Math.floor(freq*100000000000)/100000000000
-
+	
 	return freq
 
 }
@@ -98,7 +99,7 @@ Tune.prototype.setKey = function(key){
 Tune.prototype.loadScale = function(name){
 	var freqs = TuningList[name].frequencies
 	this.scale = []
-	for (var i=0;i<freqs.length;i++) {
+	for (var i=0;i<freqs.length-1;i++) {
 		this.scale.push(freqs[i]/freqs[0])
 	}
 	console.log(" ");
