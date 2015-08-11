@@ -8,7 +8,7 @@ Tune.js supports over 3,000 historical tunings and temperaments, ported from Mic
 
 [List of Tunings](http://abbernie.github.io/tune/scales.html)
 
-[Demo](http://abbernie.github.io/tune/demo.html)
+[Demo](http://abbernie.github.io/tune)
 
 ### How to Tune.js, a Quick Start Guide
 
