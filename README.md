@@ -10,7 +10,7 @@ Tune.js supports over 3,000 historical tunings and temperaments, ported from Mic
 
 [Demo](http://abbernie.github.io/tune/demo.html)
 
-### How to Use Tune.js
+### How to Tune.js, a Quick Start Guide
 
 Download tune.js and include it in a script tag at the top of your page.
 
@@ -32,19 +32,76 @@ Load your scale of choice with the ```loadScale('scale-name') ``` method.
 tune.loadScale('mean19');
 ```
 
-Pass MIDI note numbers to the ```note() ``` method. ```note(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
+Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
 
 ```js
 osc.frequency.value = tune.note(60);
 ```
+### Properties
 
-### Controls
+## Tune.mode
 
-You can set the key and base frquency of a scale with the ```setKey(midi-note-#) ``` method.
+Set the output mode of a Tune instance. Choose between 'frequency' (outputs hertz value), 'ratio'(outputs float value), or 'MIDI' (outputs MIDI float value). The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
+
+```js
+// Set the output mode to 'ratio', e.g. the ratio 3/2 will output 1.5
+tune.mode.output = 'ratio';
+```
+
+## Tune.key
+
+Returns the current key of a Tune instance. To set the key of a Tune instance use the ```setKey()``` method. The default key is set to 60 (middle C).
+
+```js
+var myKey = tune.key;
+```
+
+## Tune.scale
+
+Read only. An array containing the ratio values of the current scale loaded with the ```loadScale()``` method.
+
+```js
+// Returns the length of the current scale
+var scaleLength = tune.scale.length;
+```
+
+### Methods
+
+## Tune.note(midi-note-#)
+
+Returns a microtonally tune MIDI note. Accepts MIDI integers. Depending on the output mode the note method returns a frequency value in hertz (e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4).
+
+```js
+// If the key we are in is C4 (60), this will return the 7th scale degree of our scale
+var note = tune.note(67);
+```
+
+## Tune.setKey(midi-note-#)
+
+Sets the key and base frquency of a scale with the ```setKey(midi-note-#) ``` method.
 
 ```js
 //sets the base frequency to G4 or 392Hz
 tune.setKey(67);
+```
+
+## Tune.chord([array-of-midi-note-#s])
+
+Plays an array of notes.
+
+```js
+// plays a three note chord with the specified scale degrees
+var myMicrotonalChord = [60,67,71];
+tune.chord(myMicrotonalChord);
+```
+
+## Tune.search("string")
+
+Searches through the scale archive for scales that match the query.
+
+```js
+//returns an array of scale names that contain the word "partch"
+tune.search("partch");
 ```
 
 ### Example Tunings
