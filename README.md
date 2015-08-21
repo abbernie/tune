@@ -37,6 +37,48 @@ Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-not
 ```js
 osc.frequency.value = tune.note(60);
 ```
+
+### Methods
+
+#### Tune.note(midi-note-#)
+
+Returns a microtonally tuned note value for any MIDI integer input. By default, `Tune.note` returns a frequency value in hertz.
+
+```js
+// If the key we are in is C4 (60), this will return the frequency for 7th scale degree of our scale
+var note = tune.note(67);
+```
+
+Depending on `Tune.mode`, the `Tune.note` method may return a frequency value in hertz (default, e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4). See `Tune.mode`.
+
+#### Tune.setKey(midi-note-#)
+
+Sets the key and base frequency of a scale with the ```setKey(midi-note-#) ``` method.
+
+```js
+//sets the base (tonic) frequency to G4 or 392Hz
+tune.setKey(67);
+```
+
+#### Tune.chord([array-of-midi-note-#s])
+
+Returns an array of note values. Like `Tune.note()`, `Tune.chord()` returns values according to the current output mode (`Tune.mode`). 
+
+```js
+// returns a three note chord with the specified scale degrees
+var myMicrotonalChord = [60,67,71];
+tune.chord(myMicrotonalChord);
+```
+
+#### Tune.search("string")
+
+Searches through the scale archive for scales that match the query.
+
+```js
+//returns an array of scale names that contain the word "partch"
+tune.search("partch");
+```
+
 ### Properties
 
 #### Tune.mode
@@ -69,45 +111,6 @@ Read only. An array containing the ratio values of the current scale loaded with
 ```js
 // Returns the length of the current scale
 var scaleLength = tune.scale.length;
-```
-
-### Methods
-
-#### Tune.note(midi-note-#)
-
-Accepts MIDI integers, and returns microtonally tuned note values in frequency (default), ratio, or adjusted MIDI. Depending on Tune's output mode, the note method returns a frequency value in hertz (e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4). See `Tune.mode`.
-
-```js
-// If the key we are in is C4 (60), this will return the frequency for 7th scale degree of our scale
-var note = tune.note(67);
-```
-
-#### Tune.setKey(midi-note-#)
-
-Sets the key and base frequency of a scale with the ```setKey(midi-note-#) ``` method.
-
-```js
-//sets the base (tonic) frequency to G4 or 392Hz
-tune.setKey(67);
-```
-
-#### Tune.chord([array-of-midi-note-#s])
-
-Returns an array of note values. Like `Tune.note()`, `Tune.chord()` returns values according to the current output mode (`Tune.mode`). 
-
-```js
-// returns a three note chord with the specified scale degrees
-var myMicrotonalChord = [60,67,71];
-tune.chord(myMicrotonalChord);
-```
-
-#### Tune.search("string")
-
-Searches through the scale archive for scales that match the query.
-
-```js
-//returns an array of scale names that contain the word "partch"
-tune.search("partch");
 ```
 
 ### Example Tunings
