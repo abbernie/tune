@@ -6,7 +6,7 @@
 
 **List of Tunings:** [Tuning Archive](http://abbernie.github.io/tune/scales.html)
 
-**Demo:** [Microtonal Piano](http://abbernie.github.io/tune/demo.html)
+**Demo:** [Microtonal Piano](http://abbernie.github.io/tune/)
 
 ### How to Tune.js, a Quick Start Guide
 
