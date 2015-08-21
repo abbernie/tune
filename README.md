@@ -2,9 +2,7 @@
 
 **Authors:** Andrew Bernstein & Ben Taylor
 
-**Overview:** Tune.js is a web audio tuning library of microtonal and just intonation scales.
-
-Tune.js supports over 3,000 historical tunings and temperaments, ported from Microtuner TIDoc files [compiled and documented by Victor Cerullo from 2003-2010](http://www.venetica.net/Sites/16tone/mtx_file_specs.htm).
+**Overview:** Tune.js is a web audio tuning library of microtonal and just intonation scales. Tune.js supports over 3,000 historical tunings and temperaments, ported from Microtuner TIDoc files [compiled and documented by Victor Cerullo from 2003-2010](http://www.venetica.net/Sites/16tone/mtx_file_specs.htm).
 
 **List of Tunings:** [Tuning Archive](http://abbernie.github.io/tune/scales.html)
 
