@@ -38,6 +38,43 @@ Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-not
 osc.frequency.value = tune.note(60);
 ```
 
+
+### Properties
+
+#### Tune.mode
+
+Set the output mode of `tune.note()`. Choose between 
+
+- **frequency**: `tune.note()` will return a hertz value, e.g. 392.43834 for a pure G4 over C4
+- **ratio**: `tune.note()` will return a ratio value, e.g. 1.5 for a pure G over C
+- **MIDI**: `tune.note()` will return an adjusted MIDI pitch, e.g. 67.0195 for a pure G4 over C4
+
+```js
+// Set the output mode to 'ratio', e.g. the ratio 3/2 will output 1.5
+tune.mode.output = 'ratio';
+```
+
+The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
+
+#### Tune.key
+
+Returns the current key of a Tune instance. To set the key of a Tune instance use the ```setKey()``` method. The default key is set to 60 (middle C).
+
+```js
+var myKey = tune.key;
+```
+
+#### Tune.scale
+
+Read only. An array containing the ratio values of the current scale loaded with the ```loadScale()``` method.
+
+```js
+// Returns the length of the current scale
+var scaleLength = tune.scale.length;
+```
+
+
+
 ### Methods
 
 #### Tune.note(midi-note-#)
@@ -77,40 +114,6 @@ Searches through the scale archive for scales that match the query.
 ```js
 //returns an array of scale names that contain the word "partch"
 tune.search("partch");
-```
-
-### Properties
-
-#### Tune.mode
-
-Set the output mode of `tune.note()`. Choose between 
-
-- **frequency**: `tune.note()` will return a hertz value, e.g. 392.43834 for a pure G4 over C4
-- **ratio**: `tune.note()` will return a ratio value, e.g. 1.5 for a pure G over C
-- **MIDI**: `tune.note()` will return an adjusted MIDI pitch, e.g. 67.0195 for a pure G4 over C4
-
-```js
-// Set the output mode to 'ratio', e.g. the ratio 3/2 will output 1.5
-tune.mode.output = 'ratio';
-```
-
-The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
-
-#### Tune.key
-
-Returns the current key of a Tune instance. To set the key of a Tune instance use the ```setKey()``` method. The default key is set to 60 (middle C).
-
-```js
-var myKey = tune.key;
-```
-
-#### Tune.scale
-
-Read only. An array containing the ratio values of the current scale loaded with the ```loadScale()``` method.
-
-```js
-// Returns the length of the current scale
-var scaleLength = tune.scale.length;
 ```
 
 ### Example Tunings
