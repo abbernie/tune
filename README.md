@@ -6,9 +6,9 @@
 
 Tune.js supports over 3,000 historical tunings and temperaments, ported from Microtuner TIDoc files [compiled and documented by Victor Cerullo from 2003-2010](http://www.venetica.net/Sites/16tone/mtx_file_specs.htm).
 
-[List of Tunings](http://abbernie.github.io/tune/scales.html)
+**List of Tunings:** [Tuning Archive](http://abbernie.github.io/tune/scales.html)
 
-[Demo](http://abbernie.github.io/tune/demo.html)
+**Demo:** [Microtonal Piano](http://abbernie.github.io/tune/demo.html)
 
 ### How to Tune.js, a Quick Start Guide
 
@@ -32,7 +32,7 @@ Load your scale of choice with the ```loadScale('scale-name') ``` method.
 tune.loadScale('mean19');
 ```
 
-Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-note-#) ``` outputs the corresponding pitch in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
+Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-note-#) ``` returns the corresponding frequency in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
 
 ```js
 osc.frequency.value = tune.note(60);
@@ -41,12 +41,18 @@ osc.frequency.value = tune.note(60);
 
 #### Tune.mode
 
-Set the output mode of a Tune instance. Choose between 'frequency' (outputs hertz value), 'ratio'(outputs float value), or 'MIDI' (outputs MIDI float value). The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
+Set the output mode of `tune.note()`. Choose between 
+
+- **frequency**: `tune.note()` will return a hertz value, e.g. 392.43834 for a pure G4 over C4
+- **ratio**: `tune.note()` will return a ratio value, e.g. 1.5 for a pure G over C
+- **MIDI**: `tune.note()` will return an adjusted MIDI pitch, e.g. 67.0195 for a pure G4 over C4
 
 ```js
 // Set the output mode to 'ratio', e.g. the ratio 3/2 will output 1.5
 tune.mode.output = 'ratio';
 ```
+
+The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
 
 #### Tune.key
 
@@ -69,28 +75,28 @@ var scaleLength = tune.scale.length;
 
 #### Tune.note(midi-note-#)
 
-Returns a microtonally tune MIDI note. Accepts MIDI integers. Depending on the output mode the note method returns a frequency value in hertz (e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4).
+Accepts MIDI integers, and returns microtonally tuned note values in frequency (default), ratio, or adjusted MIDI. Depending on Tune's output mode, the note method returns a frequency value in hertz (e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4). See `Tune.mode`.
 
 ```js
-// If the key we are in is C4 (60), this will return the 7th scale degree of our scale
+// If the key we are in is C4 (60), this will return the frequency for 7th scale degree of our scale
 var note = tune.note(67);
 ```
 
 #### Tune.setKey(midi-note-#)
 
-Sets the key and base frquency of a scale with the ```setKey(midi-note-#) ``` method.
+Sets the key and base frequency of a scale with the ```setKey(midi-note-#) ``` method.
 
 ```js
-//sets the base frequency to G4 or 392Hz
+//sets the base (tonic) frequency to G4 or 392Hz
 tune.setKey(67);
 ```
 
 #### Tune.chord([array-of-midi-note-#s])
 
-Plays an array of notes.
+Returns an array of note values. Like `Tune.note()`, `Tune.chord()` returns values according to the current output mode (`Tune.mode`). 
 
 ```js
-// plays a three note chord with the specified scale degrees
+// returns a three note chord with the specified scale degrees
 var myMicrotonalChord = [60,67,71];
 tune.chord(myMicrotonalChord);
 ```
@@ -116,6 +122,7 @@ tune.search("partch");
 | helmholtz_pure | Helmholtz's two-keyboard harmonium tuning untempered |
 | partch_43 | Harry Partch's 43-tone pure scale |
 | johnston_81 | Ben Johnston's 81-note 5-limit scale of Sonata for Microtonal Piano |
+| young-lm_piano | LaMonte Young's Well-Tempered Piano |
 | xenakis_chrom | Xenakis's Byzantine Liturgical mode, 5 + 19 + 6 parts |
 | slendro | Observed Javanese Slendro scale, Helmholtz/Ellis p. 518, nr.94 |
 | harrison_5 | From Lou Harrison, a pelog style pentatonic |
