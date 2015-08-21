@@ -9,35 +9,36 @@
 
         body {
             font-family:"Josefin Sans";
+            padding:0;
+            margin:0;
         }
 
         #title {
-            padding:70px 0px 30px;
-            text-align:center;
-            
-            font-size: 32pt;
-
+            padding:20px 10px;
+            font-size:14pt;
+            display:inline-block;
         }
 
         #scale-list {
             text-align: left;
-            width:900px;
-            margin:0 auto;
+         /*   width:900px; */
+            margin:40px auto;
             border-spacing:0px;
+            width:100%;
         }
 
         #name, #description {
             font-weight:normal;
-            padding:20px 10px;
-            font-size:14pt;
-            border-bottom:solid 1px #ddd;
+            padding:10px 10px;
+            font-size:13pt;
         }
 
         #length {
             font-weight:normal;
-            padding:20px 80px;
-            font-size:14pt;
-            border-bottom:solid 1px #ddd;
+            padding:10px 50px;
+            font-size:13pt;
+            text-align:center;
+            width:100px;
         }
 
         #name {
@@ -55,45 +56,67 @@
         /* menu */
 
         #menu {
-            max-width:900px;
-            margin:0px auto;
-            text-align:center;
         }
 
         #menu input {
             border-radius:0px;
-            border:solid 1px black;
+            border:solid 1px #000;
             background-color:#fff;
             outline:none;
-            padding:3px;
-            font-size:14pt;
+            padding:7px;
+            font-size:10pt;
             display:block;
-            margin:0 auto 30px;
+            margin:10px 10px 10px;
             width:300px;
+            float:right;
+        }
+
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+           color:    #000;
+           opacity:  1;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+           color:    #000;
+           opacity:  1;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+           color:    #000;
+           opacity:  1;
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+           color:    #000;
+           opacity:  1;
         }
 
         #menu a {
-            color:#1bd;
+            color:#000;
+            background-color:#f3f3f3;
             text-decoration:none;
-            padding:0px 11px;
+            padding:6px 7px 3px;
             display:block;
             cursor:pointer;
-            font-size:12pt;
+            font-size:11pt;
             float:left;
+            margin-left:5px;
         }
 
         #menu a:hover {
-            text-decoration:underline;
+            background-color:#000;
+            color:#fff;
         }
 
     </style>
     <body>
-        <div id="title"> Tune.js List of Scales</div>
+        
         <div ng-app="app" ng-controller="ctrl">
 
             <div id="menu">
 
-                <input type="text" placeholder="Search Tunings" ng-keyup="searchTunings($event)">
+                <div id="title">Tune.js Scale Archive</div>
+
+                <input type="text" placeholder="Search (e.g. partch)" ng-keyup="searchTunings($event)">
+
+                <div style="min-width:780px;float:right">
 
                 <a ng-click="searchTunings('')">All</a>
                 <a ng-click="searchTunings('a')">A</a>
@@ -123,6 +146,8 @@
                 <a ng-click="searchTunings('y')">Y</a>
                 <a ng-click="searchTunings('z')">Z</a>
 
+                </div>
+
             </div>
             
             <table id="scale-list">
@@ -130,7 +155,7 @@
                    
                     <td id="name">Name</td>
                     <td id="description">Description</td>
-                    <td id="length">Length</td>
+                    <td id="length">Notes</td>
                    
                 </tr>
                 <tr id="scale" ng-repeat="(scale, description) in scales">
