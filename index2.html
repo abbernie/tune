@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+      <script src="js/Tone.min.js"></script>
+      <script src="js/tune.js"></script>
+      <script src="js/tunings.js"></script>
+      <script src="js/three.min.js"></script>
+      <script src="js/audiokeys.js"></script>
+      <script src="js/nexusUI.js"></script>
+      <script src="js/qwerty-hancock2.js"></script>
+      <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+      <link rel='stylesheet' href='style2.css'>
+
+  </head>
+
+  <body>
+
+    <h1>Tune.js Demo</h1>
+    <h2>A Web Audio Microtonal Piano</h2>
+    <h3>Use your computer keyboard to play</h3>
+  
+    <div id="keyboard">
+      
+
+    </div>
+    
+    <div id="scales">
+      <p>Scale:</p>
+      <canvas nx="select" choices="ji_12,young-lm_piano,partch-barstow,pyth_12,couperin,johnston,bach2,ptolemy,chin_bronze,slendro,xenakis_chrom,partch_43,et-mix6"></canvas><br>
+      <p id="scaledesc"></p>
+    </div>
+
+    <div id="loading">
+      Loading Samples...
+    </div>
+
+    <div id="fork">
+      Visit the <a href="http://abbernie.github.io/tune/scales.html" target="blank">Tune.js Scale Archive</a> for a full list of scales and descriptions.<br>
+      <a href="http://www.github.com/abbernie/tune">Fork</a> this project on github.
+      <footer> Tune.js was written by <a href="http://andrewbernstein.tumblr.com">Andrew Bernstein</a> and <a href="http://www.whitechord.org">Ben Taylor</a>.
+    </div>
+
+  </body>
+  <script>
+      
+  /*
+  *
+  * Interface
+  *
+  */
+
+    var keyboard = new QwertyHancock({
+                 id: 'keyboard',
+                 width: 800,
+                 height: 100,
+                 octaves: 2,
+                 startNote: 'c4',
+                 whiteNotesColour: 'white',
+                 blackNotesColour: 'black',
+                 activeColour: '#f00'
+            });
+    var gui = document.getElementById('keyboard')
+    gui.style.margin = '65px auto'
+    gui.style.padding = '20px'
+
+   nx.onload = function(){
+    
+    select1.on('*',function(){
+      var scale = select1.val.text;
+      tune.loadScale(scale);
+      select1.canvas.blur();
+      document.getElementById("scaledesc").innerHTML = TuningList[scale].description
+    });
+
+    select1.canvas.selectedIndex = 0;
+    document.getElementById("scaledesc").innerHTML = TuningList["ji_12"].description
+
+  }
+
+
+  var loading = document.getElementById('loading')
+  
+  loading.style.left = '40%';
+  loading.style.top = '40%';
+  loading.style.padding = '50px';
+
+
+    
+    /*
+    *
+    *
+    * AUDIO SYNTHESIS CODE
+    *
+    *
+    */
+
+    // Create a new Tune object
+    var tune = new Tune();
+    // Load a 12 tone just intonation scale
+    tune.loadScale('ji_12');
+    // Set the output mode to 'MIDI' 
+    tune.mode.output = 'MIDI';
+
+    //tune.setKey(69);
+
+    var actx = new (AudioContext || wedkitAudioContext)();
+
+    var piano = new Tone.Sampler({
+            
+      "C4":"samples/c4.mp3"
+
+    });
+
+    piano.toMaster();
+
+    Tone.Buffer.onload = function(){
+      document.getElementById('loading').style.display = 'none';
+
+      var keyboard = new AudioKeys({
+        rows:2,
+        polyphony:8
+      });
+
+      keyboard.down( function(note) {
+        piano.triggerAttack("C4");
+        // Detune each piano sample 
+        piano.pitch = tune.note(note.note-tune.scale.length)-tune.key; 
+  
+      });
+
+      keyboard.up( function(note) {
+      
+
+      });
+
+    }
+
+
+
+
+
+
+    /*
+    *
+    * Drawing
+    *
+    *
+
+
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    var geometry = new THREE.BoxGeometry( 500, 300, 1 );
+    var white = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+    var black = new THREE.MeshBasicMaterial( { color: 0x110000 } );
+
+   
+    */
+
+   
+  </script>
+</html>
