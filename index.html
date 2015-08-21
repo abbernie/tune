@@ -1,177 +1,248 @@
+<!DOCTYPE html>
 <html>
   <head>
-
-  	<script src="tunings.js"></script>
-  	<script src="tune.js"></script>
-    <script type="text/javascript" src="node_modules/tone/build/Tone.js"></script>
-    <script type="text/javascript" src="js/nexusUI.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,300,700' rel='stylesheet' type='text/css'>
+     
+      <script src="js/tone.min.js"></script>
+      <script src="js/tune.js"></script>
+      <script src="js/tunings.js"></script>
+      <script src="js/three.min.js"></script>
+      <script src="js/audiokeys.js"></script>
+      <script src="js/nexusUI.js"></script>
+      <script src="js/qwerty-hancock.js"></script>
+      <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+      <link rel='stylesheet' href='style.css'>
 
   </head>
-  <style>
 
-    body{
-      font-family: 'Josefin Sans';
-    }
-    h1{
-      display:block;
-      font-weight:bold;
-      margin:0px auto;
-      padding:30px;
-      font-size:32pt;
-      text-align:center;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-
-    }
-
-    #keyboard{
-      display:block;
-      margin:10px auto;
-      width:500px;
-      height:200px;
-    }
-
-    #scales{
-      display:block;
-      margin:0px auto;
-      padding:10px;
-      font-weight:lighter;
-      text-align: center;
-      font-size:18pt;
-    }
-
-    #scales p {
-      padding:10px;
-    }
-
-    #key{
-      display:block;
-      margin:10px auto;
-      padding:10px 10px;
-      text-align: center;
-    }
-
-    a {
-      text-decoration: none;
-      color:#1bd;
-    }
-    a:hover{
-      text-decoration: underline;
-    }
-
-    #container{
-      background-color: #fafafa;
-      box-shadow: 0px 2px #eee;
-      padding:30px;
-      border-radius: 10px;
-    }
-
-  </style>
   <body>
 
-    <a href="https://github.com/abbernie"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
-
-
     <h1>Tune.js Demo</h1>
-    <div id="container">
-      <div id="key-wrapper">
-
-        <canvas nx="keyboard" id="keyboard"></canvas>
-        <div id="key">
-          <p> Press the Q key to dynamically reset the key to last note played</p>
-        </div>
-      </div>
-
+    <h2> A Web Audio Microtonal Piano</h2>
+    <h3> Use your computer keyboard to play</h3>
+  
+  <div id="keyboard">
       
-        <div id="scales">
-          <p>Scale Choices</p>
-          <canvas nx="select" choices="ji_12,harm30,pyth_31,partch_43,johnston_81,xenakis_chrom,ptolemy,helmholtz_pure,05-19,couperin"></canvas>
-          <p> Explore all ~3500 available scales in the <a href="scales.html">Scale Archive</a></p>
-        </div>
-   </div>
+
+  </div>
     
+      <div id="scales">
+        <p>Scale Choices</p>
+        <canvas nx="select" choices="ptolemy,ji_12,harm30,pyth_31,partch_43,johnston_81,xenakis_chrom,helmholtz_pure,05-19,couperin"></canvas>
+        <p> Visit <a href="http://abbernie.github.io/tune/scales.html"> the archive</a> for a full list of scales with descriptions
+      </div>
+    </div>
 
+    <div id="loading">
+      Loading Samples...
+    </div>
+
+  </body>
+  <script>
+      
+  /*
+  *
+  * Interface
+  *
+  */
+
+    var keyboard = new QwertyHancock({
+                 id: 'keyboard',
+                 width: 600,
+                 height: 150,
+                 octaves: 1,
+                 startNote: 'c4',
+                 whiteNotesColour: 'white',
+                 blackNotesColour: 'black',
+                 hoverColour: '#f00'
+            });
+    var gui = document.getElementById('keyboard')
+    gui.style.margin = '65px auto'
+    gui.style.padding = '20px'
+
+   nx.onload = function(){
     
-	<script>
-
-  //Create and load a microtonal scale 
-  var tune = new Tune();
-  tune.loadScale("ji_12");
-  console.log(tune.key);
-  var midi = tune.key;
-
-  document.onkeypress = function(e){
-    console.log(e.which);
-    if(e.which == 113){
-      console.log("hey!",midi);
-       tune.setKey(midi);
-      console.log("key set to ", midi)
-    }
-
-  }
-  
-  //Create a synthesizer and set it's properties
-  var synth = new Tone.PolySynth(8, Tone.SimpleSynth).toMaster();
-  
-  synth.set({
-    envelope:{
-        attackCurve:"linear",
-        attack:.1,
-        decay:1,
-        susatain:1,
-        release:1
-      },
-      filter: {
-        type:"allpass"
-      }
-    });
-
-  nx.onload = function(){
-    
-    keyboard.octaves = 2;
-    //keyboard.midibase = 60;
-    keyboard.init();
-
-    keyboard.on('*', function(data){
-     
-      midi = data.note;
-      console.log("midi",midi);
-      var note = tune.note(midi);
-      console.log(note);
-      if(data.on > 0){
-        synth.triggerAttack(note);
-      } else if (data.on == 0){
-        synth.triggerRelease(note);
-      }
-     // clock.start();
-         });
-
     select1.on('*',function(){
       var scale = select1.val.text;
       tune.loadScale(scale);
-      var pattern = [];
-      for(var i = 0; i < tune.scale.length; i++){
-        if(i%2 == 0){
-          pattern[i] = 'w';
-        } else{
-          pattern[i] = 'b';
-        }
-      }
-      keyboard.keypattern = pattern;
-      keyboard.init();
+
     });
 
   }
 
- 
+  var scales = document.getElementById('scales')
+  scales.style.width = '300px';
+  scales.style.height = '100px';
+  scales.style.top = '-100px'
+
+  var loading = document.getElementById('loading')
+  
+  loading.style.left = '40%';
+  loading.style.top = '40%';
+  loading.style.padding = '50px';
+
+
+    
+    /*
+    *
+    *
+    * AUDIO SYNTHESIS CODE
+    *
+    *
+    */
+
+    // Create a new Tune object
+    var tune = new Tune();
+    // Load a 12 tone just intonation scale
+    tune.loadScale('ptolemy');
+    // Set the output mode to 'MIDI' 
+    tune.mode.output = 'MIDI';
+
+    //tune.setKey(69);
+
+    var actx = new (AudioContext || wedkitAudioContext)();
+
+    var piano = new Tone.Sampler({
+            
+            12:"samples/c4.mp3",
+            13:"samples/c4.mp3",
+            14:"samples/c4.mp3",
+            15:"samples/c4.mp3",
+            16:"samples/c4.mp3",
+            17:"samples/c4.mp3",
+            18:"samples/c4.mp3",
+            19:"samples/c4.mp3",
+            20:"samples/c4.mp3",
+            21:"samples/c4.mp3",
+            22:"samples/c4.mp3",
+            23:"samples/c4.mp3",
+            
+            24:"samples/c4.mp3",
+            25:"samples/c4.mp3",
+            26:"samples/c4.mp3",
+            27:"samples/c4.mp3",
+            28:"samples/c4.mp3",
+            29:"samples/c4.mp3",
+            30:"samples/c4.mp3",
+            31:"samples/c4.mp3",
+            32:"samples/c4.mp3",
+            33:"samples/c4.mp3",
+            34:"samples/c4.mp3",
+            35:"samples/c4.mp3",
+            
+            36:"samples/c4.mp3",
+            37:"samples/c4.mp3",
+            38:"samples/c4.mp3",
+            39:"samples/c4.mp3",
+            40:"samples/c4.mp3",
+            41:"samples/c4.mp3",
+            42:"samples/c4.mp3",
+            43:"samples/c4.mp3",
+            44:"samples/c4.mp3",
+            45:"samples/c4.mp3",
+            46:"samples/c4.mp3",
+            47:"samples/c4.mp3",
+            
+            48:"samples/c4.mp3",
+            49:"samples/c4.mp3",
+            50:"samples/c4.mp3",
+            51:"samples/c4.mp3",
+            52:"samples/c4.mp3",
+            53:"samples/c4.mp3",
+            54:"samples/c4.mp3",
+            55:"samples/c4.mp3",
+            56:"samples/c4.mp3",
+            57:"samples/c4.mp3",
+            58:"samples/c4.mp3",
+            59:"samples/c4.mp3",
+            
+            60:"samples/c4.mp3",
+            61:"samples/c4.mp3",
+            62:"samples/c4.mp3",
+            63:"samples/c4.mp3",
+            64:"samples/c4.mp3",
+            65:"samples/c4.mp3",
+            66:"samples/c4.mp3",
+            67:"samples/c4.mp3",
+            68:"samples/c4.mp3",
+            69:"samples/c4.mp3",
+            70:"samples/c4.mp3",
+            71:"samples/c4.mp3",
+            
+            72:"samples/c4.mp3",
+            73:"samples/c4.mp3",
+            74:"samples/c4.mp3",
+            75:"samples/c4.mp3",
+            76:"samples/c4.mp3",
+            77:"samples/c4.mp3",
+            78:"samples/c4.mp3",
+            79:"samples/c4.mp3",
+            80:"samples/c4.mp3",
+            81:"samples/c4.mp3",
+            82:"samples/c4.mp3",
+            83:"samples/c4.mp3",
+            84:"samples/c4.mp3",
+
+            
+          });
+
+    piano.toMaster();
+
+    Tone.Buffer.onload = function(){
+      document.getElementById('loading').style.display = 'none';
+      console.log('loaded')
+
+      var keyboard = new AudioKeys({
+        rows:1,
+        polyphony:8
+      });
+
+      keyboard.down( function(note) {
+        
+        console.log(note.note);
+        piano.triggerAttack(note.note);
+        // Detune each piano sample 
+        piano.pitch = tune.note(note.note)-tune.key; 
+        console.log("detune", piano.pitch);
+
+        console.log(note);
+
+
+      });
+
+      keyboard.up( function(note) {
+      
+
+      });
+
+    }
 
 
 
 
 
 
+    /*
+    *
+    * Drawing
+    *
+    *
 
-	</script>
-  </body>
+
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    var geometry = new THREE.BoxGeometry( 500, 300, 1 );
+    var white = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+    var black = new THREE.MeshBasicMaterial( { color: 0x110000 } );
+
+   
+    */
+
+   
+  </script>
 </html>
