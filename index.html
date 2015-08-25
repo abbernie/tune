@@ -5,40 +5,41 @@
       <script src="js/Tone.min.js"></script>
       <script src="js/tune.js"></script>
       <script src="js/tunings.js"></script>
-      <script src="js/three.min.js"></script>
+      
       <script src="js/audiokeys.js"></script>
       <script src="js/nexusUI.js"></script>
-      <script src="js/qwerty-hancock.js"></script>
+      <script src="js/qwerty-hancock2.js"></script>
       <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
-      <link rel='stylesheet' href='style.css'>
+      <link rel='stylesheet' href='style2.css'>
 
   </head>
 
   <body>
 
     <h1>Tune.js Demo</h1>
-    <h2> A Web Audio Microtonal Piano</h2>
-    <h3> Use your computer keyboard to play</h3>
-    <h3> Transpose octaves with 'z'/'x'</h3>
+    <h2>A Web Audio Microtonal Piano</h2>
+    <h3>Use your computer keyboard to play</h3>
   
-  <div id="keyboard">
+    <div id="keyboard">
       
 
-  </div>
+    </div>
     
-      <div id="scales">
-        <p>Scale Choices</p>
-        <canvas nx="select" choices="ptolemy,ji_12,harm30,pyth_31,partch_43,johnston_81,xenakis_chrom,helmholtz_pure,05-19,couperin"></canvas>
-        <p> Visit <a href="http://abbernie.github.io/tune/scales.html"> the archive</a> for a full list of scales with descriptions
-      </div>
+    <div id="scales">
+      <p>Scale:</p>
+      <canvas nx="select" choices="ji_12,young-lm_piano,partch-barstow,pyth_12,couperin,johnston,bach2,ptolemy,chin_bronze,slendro,xenakis_chrom,partch_43,et-mix6"></canvas><br>
+      <p id="scaledesc"></p>
     </div>
 
     <div id="loading">
       Loading Samples...
     </div>
 
-      <div id="fork"><a href="www.github.com/abbernie.tune">Fork</a> this project on github.
-    <footer> Tune.js was written by <a href="http://andrewbernstein.tumblr.com">Andrew Bernstein</a> and <a href="http://www.whitechord.org"> Ben Taylor </a>.
+    <div id="fork">
+      Visit the <a href="http://abbernie.github.io/tune/scales.html" target="blank">Tune.js Scale Archive</a> for a full list of scales and descriptions.<br>
+      <a href="http://www.github.com/abbernie/tune">Fork</a> this project on github.
+      <footer> Tune.js was written by <a href="http://andrewbernstein.tumblr.com">Andrew Bernstein</a> and <a href="http://www.whitechord.org">Ben Taylor</a>.
+    </div>
 
   </body>
   <script>
@@ -51,14 +52,17 @@
 
     var keyboard = new QwertyHancock({
                  id: 'keyboard',
-                 width: 600,
-                 height: 150,
-                 octaves: 1,
+                 width: 800,
+                 height: 100,
+                 octaves: 2,
                  startNote: 'c4',
                  whiteNotesColour: 'white',
                  blackNotesColour: 'black',
-                 hoverColour: '#f00'
+                 activeColour: '#f00'
             });
+
+
+
     var gui = document.getElementById('keyboard')
     gui.style.margin = '65px auto'
     gui.style.padding = '20px'
@@ -68,15 +72,15 @@
     select1.on('*',function(){
       var scale = select1.val.text;
       tune.loadScale(scale);
-
+      select1.canvas.blur();
+      document.getElementById("scaledesc").innerHTML = TuningList[scale].description
     });
+
+    select1.canvas.selectedIndex = 0;
+    document.getElementById("scaledesc").innerHTML = TuningList["ji_12"].description
 
   }
 
-  var scales = document.getElementById('scales')
-  scales.style.width = '300px';
-  scales.style.height = '100px';
-  scales.style.top = '-100px'
 
   var loading = document.getElementById('loading')
   
@@ -97,7 +101,7 @@
     // Create a new Tune object
     var tune = new Tune();
     // Load a 12 tone just intonation scale
-    tune.loadScale('ptolemy');
+    tune.loadScale('ji_12');
     // Set the output mode to 'MIDI' 
     tune.mode.output = 'MIDI';
 
@@ -107,117 +111,41 @@
 
     var piano = new Tone.Sampler({
             
-            12:"samples/c4.mp3",
-            13:"samples/c4.mp3",
-            14:"samples/c4.mp3",
-            15:"samples/c4.mp3",
-            16:"samples/c4.mp3",
-            17:"samples/c4.mp3",
-            18:"samples/c4.mp3",
-            19:"samples/c4.mp3",
-            20:"samples/c4.mp3",
-            21:"samples/c4.mp3",
-            22:"samples/c4.mp3",
-            23:"samples/c4.mp3",
-            
-            24:"samples/c4.mp3",
-            25:"samples/c4.mp3",
-            26:"samples/c4.mp3",
-            27:"samples/c4.mp3",
-            28:"samples/c4.mp3",
-            29:"samples/c4.mp3",
-            30:"samples/c4.mp3",
-            31:"samples/c4.mp3",
-            32:"samples/c4.mp3",
-            33:"samples/c4.mp3",
-            34:"samples/c4.mp3",
-            35:"samples/c4.mp3",
-            
-            36:"samples/c4.mp3",
-            37:"samples/c4.mp3",
-            38:"samples/c4.mp3",
-            39:"samples/c4.mp3",
-            40:"samples/c4.mp3",
-            41:"samples/c4.mp3",
-            42:"samples/c4.mp3",
-            43:"samples/c4.mp3",
-            44:"samples/c4.mp3",
-            45:"samples/c4.mp3",
-            46:"samples/c4.mp3",
-            47:"samples/c4.mp3",
-            
-            48:"samples/c4.mp3",
-            49:"samples/c4.mp3",
-            50:"samples/c4.mp3",
-            51:"samples/c4.mp3",
-            52:"samples/c4.mp3",
-            53:"samples/c4.mp3",
-            54:"samples/c4.mp3",
-            55:"samples/c4.mp3",
-            56:"samples/c4.mp3",
-            57:"samples/c4.mp3",
-            58:"samples/c4.mp3",
-            59:"samples/c4.mp3",
-            
-            60:"samples/c4.mp3",
-            61:"samples/c4.mp3",
-            62:"samples/c4.mp3",
-            63:"samples/c4.mp3",
-            64:"samples/c4.mp3",
-            65:"samples/c4.mp3",
-            66:"samples/c4.mp3",
-            67:"samples/c4.mp3",
-            68:"samples/c4.mp3",
-            69:"samples/c4.mp3",
-            70:"samples/c4.mp3",
-            71:"samples/c4.mp3",
-            
-            72:"samples/c4.mp3",
-            73:"samples/c4.mp3",
-            74:"samples/c4.mp3",
-            75:"samples/c4.mp3",
-            76:"samples/c4.mp3",
-            77:"samples/c4.mp3",
-            78:"samples/c4.mp3",
-            79:"samples/c4.mp3",
-            80:"samples/c4.mp3",
-            81:"samples/c4.mp3",
-            82:"samples/c4.mp3",
-            83:"samples/c4.mp3",
-            84:"samples/c4.mp3",
+      "C4":"samples/c4.mp3"
 
-            
-          });
+    });
 
     piano.toMaster();
 
     Tone.Buffer.onload = function(){
       document.getElementById('loading').style.display = 'none';
-      console.log('loaded')
-
+      /*
       var keyboard = new AudioKeys({
-        rows:1,
+        rows:2,
         polyphony:8
       });
+      */
 
-      keyboard.down( function(note) {
-        
-        console.log(note.note);
-        piano.triggerAttack(note.note);
-        // Detune each piano sample 
-        piano.pitch = tune.note(note.note)-tune.key; 
-        console.log("detune", piano.pitch);
+        keyboard.keyDown = function(note, freq) {
+          console.log(freq)
+          
 
-        console.log(note);
+          var midi = 69 + 12*Math.log(freq/440)/Math.log(2)
 
+          console.log(midi);
+          piano.triggerAttack("C4");
+          
+          // Detune each piano sample 
+          piano.pitch = tune.note(midi-tune.scale.length)-tune.key; 
+  
+      };
 
-      });
-
+/*
       keyboard.up( function(note) {
       
 
       });
-
+*/
     }
 
 
