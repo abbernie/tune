@@ -4,9 +4,6 @@
      
       <script src="js/Tone.min.js"></script>
       <script src="js/tune.js"></script>
-      <script src="js/tunings.js"></script>
-      
-      <script src="js/audiokeys.js"></script>
       <script src="js/nexusUI.js"></script>
       <script src="js/qwerty-hancock2.js"></script>
       <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
@@ -119,20 +116,11 @@
 
     Tone.Buffer.onload = function(){
       document.getElementById('loading').style.display = 'none';
-      /*
-      var keyboard = new AudioKeys({
-        rows:2,
-        polyphony:8
-      });
-      */
 
         keyboard.keyDown = function(note, freq) {
-          console.log(freq)
-          
-
+       
           var midi = 69 + 12*Math.log(freq/440)/Math.log(2)
-
-          console.log(midi);
+  
           piano.triggerAttack("C4");
           
           // Detune each piano sample 
@@ -140,40 +128,13 @@
   
       };
 
-/*
-      keyboard.up( function(note) {
-      
 
-      });
-*/
     }
 
 
 
 
 
-
-    /*
-    *
-    * Drawing
-    *
-    *
-
-
-
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
-
-    var geometry = new THREE.BoxGeometry( 500, 300, 1 );
-    var white = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-    var black = new THREE.MeshBasicMaterial( { color: 0x110000 } );
-
-   
-    */
 
    
   </script>
