@@ -24,7 +24,9 @@
     
     <div id="scales">
       <p>Scale:</p>
-      <canvas nx="select" choices="ji_12,young-lm_piano,partch-barstow,pyth_12,couperin,johnston,bach2,ptolemy,chin_bronze,slendro,xenakis_chrom,partch_43,et-mix6"></canvas><br>
+      <canvas nx="select" choices="ji_12,young-lm_piano,partch-barstow,pyth_12,couperin,johnston,bach2,ptolemy,chin_bronze,slendro,xenakis_chrom,partch_43,et-mix6" style="width:200px;height:30px"></canvas>
+    <!--  or
+      <input type="text" placeholder="Search" onkeydown="searchTunings(event,this)"></input> -->
       <p id="scaledesc"></p>
     </div>
 
@@ -120,11 +122,15 @@
         keyboard.keyDown = function(note, freq) {
        
           var midi = 69 + 12*Math.log(freq/440)/Math.log(2)
+
+          if (midi) {
   
-          piano.triggerAttack("C4");
-          
-          // Detune each piano sample 
-          piano.pitch = tune.note(midi-tune.scale.length)-tune.key; 
+            piano.triggerAttack("C4");
+            
+            // Detune each piano sample 
+            piano.pitch = tune.note(midi-tune.scale.length)-tune.key; 
+   
+          }
   
       };
 
@@ -132,7 +138,13 @@
     }
 
 
+    function searchTunings(e,input) {
+      if (e.which==13) {
+         tune.loadScale(input.value);
+      }
 
+      return false;
+    }
 
 
 
