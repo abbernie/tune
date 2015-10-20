@@ -138,6 +138,6 @@ tune.search("partch");
 
 ### License
 
-Tune.js is licensed as open source software under [the MIT license](https://opensource.org/licenses/MIT)
+Tune.js is licensed as open source software under [the MIT license](https://opensource.org/licenses/MIT), 
 Archive copyright 2003-2010 by Victor Cerullo
 
