@@ -135,3 +135,7 @@ tune.search("partch");
 ![BigP](http://www.mathopenref.com/images/bioimages/pythagoras1.jpg)
 ![BigZ](https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gioseffo_Zarlino.jpg/200px-Gioseffo_Zarlino.jpg)
 ![Partch](http://www.pas.org/images/default-source/hall-of-fame-photos/hpartch.jpg?sfvrsn=0)
+
+### License
+
+GendyJS is licensed as open source software under [the MIT license](https://opensource.org/licenses/MIT)
