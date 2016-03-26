@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+    <script src="tune.js"></script>
+
+  </head>
+
+  <body style="font-family:helvetica;">
+
+    <h1 style="font-weight:100">Tune.js Simple Demo</h1>
+
+    <h2 style="font-weight:100">Turn up your sound</h2>
+
+  </body>
+  <script>
+      
+
+    /* TUNE SETUP */
+ 
+    // Create a new Tune object
+    var tune = new Tune();
+
+    // Load a 12 tone just intonation scale
+    tune.loadScale('slendro');
+    
+
+
+    /* WEB AUDIO SETUP */
+    var actx = new (AudioContext || wedkitAudioContext)();
+    var osc = actx.createOscillator()
+    var vol = actx.createGain()
+    var echo = actx.createDelay()
+    echo.delayTime.value = 0.3
+    vol.gain.value = 0.5
+    osc.type = "sawtooth"
+    osc.connect(vol).connect(echo).connect(actx.destination)
+    echo.connect(vol)
+    osc.start()
+
+
+    /* PLAYING NOTES */
+
+    changeNote = function() {
+
+      var step = random(tune.scale.length)
+      var octave = random(-3,2)
+
+      var newFreq = tune.note( step, octave )
+
+      osc.frequency.setValueAtTime( newFreq, actx.currentTime)
+
+    }
+
+    setInterval(changeNote, 50)
+
+
+
+
+
+    var random = function(limit,limit2) {
+      if (limit2) {
+        return Math.floor(Math.random() * (limit2-limit)) + limit
+      } else {
+        return Math.floor(Math.random() * limit)
+      }
+    }
+    
+   
+  </script>
+</html>

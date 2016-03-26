@@ -30,16 +30,29 @@ Load your scale of choice with the ```loadScale('scale-name') ``` method.
 tune.loadScale('mean19');
 ```
 
-Pass MIDI note numbers to the ```note() ``` method. By default, ```note(midi-note-#) ``` returns the corresponding frequency in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
+Set the root frequency that you'll be working with. This sets your scale to the key of A 440
 
 ```js
-osc.frequency.value = tune.note(60);
+tune.tonicize(220);
 ```
+
+Pass scale degree numbers to the ```note() ``` method. By default, ```note(degree) ``` returns the corresponding frequency in Hertz. You can use ```note() ``` to set the frequency of an oscillator.
+
+```js
+osc.frequency.value = tune.note(2);
+```
+
+Optionally, pass an octave in as a second parameter. This will return the frequency for the third note in the scale, one octave down.
+
+```js
+osc.frequency.value = tune.note(2,-1);
+```
+
 
 
 ### Properties
 
-#### Tune.mode
+#### Tune.mode.output
 
 Set the output mode of `tune.note()`. Choose between 
 
@@ -54,12 +67,12 @@ tune.mode.output = 'ratio';
 
 The default output mode is 'frequency'. Currently the only available input mode is 'MIDI'. 
 
-#### Tune.key
+#### Tune.tonic
 
-Returns the current key of a Tune instance. To set the key of a Tune instance use the ```setKey()``` method. The default key is set to 60 (middle C).
+The current root frequency of this Tune instance. To set the tonic of a Tune instance use the ```tonicize()``` method. The default tonic is set to 440 Hz.
 
 ```js
-var myKey = tune.key;
+var tonic = 200;
 ```
 
 #### Tune.scale
@@ -75,27 +88,31 @@ var scaleLength = tune.scale.length;
 
 ### Methods
 
-#### Tune.note(midi-note-#)
+#### Tune.note(scale-degree-# [, octave-#])
 
-Returns a microtonally tuned note value for any MIDI integer input. By default, `Tune.note` returns a frequency value in hertz.
+Returns a microtonally tuned note value for any scale degree input. By default, `Tune.note` returns a frequency value in hertz.
 
 ```js
-// If the key we are in is C4 (60), this will return the frequency for 7th scale degree of our scale
-var note = tune.note(67);
+// This will return the frequency for 7th scale degree of our scale
+var note = tune.note(7)
 ```
 
 Depending on `Tune.mode`, the `Tune.note` method may return a frequency value in hertz (default, e.g. 392.43834 for a pure G4 over C4), a ratio value as a float (e.g. 1.5 for a pure G over C), or a MIDI float value (e.g. 67.0195 for a pure G4 over C4). See `Tune.mode`.
 
-#### Tune.setKey(midi-note-#)
+An optional second argument lets you specify what octave to be played (i.e. -1 for one octave down, 1 for one octave up). 
 
-Sets the key and base frequency of a scale with the ```setKey(midi-note-#) ``` method.
+Additionally, `tune.note()` automatically wraps scale degrees that are out of range, so that `tune.note(8)` in a 7 note scale will return the second scale degree, one octave up. Therefore, given a 7 note scale, `tune.note(8)` is equivalent to `tune.note(1,1)`
+
+#### Tune.tonicize(frequency)
+
+Sets the scale's root frequency.
 
 ```js
-//sets the base (tonic) frequency to G4 or 392Hz
-tune.setKey(67);
+//sets the base (tonic) frequency to 200 Hz
+tune.tonicize(200);
 ```
 
-#### Tune.chord([array-of-midi-note-#s])
+#### Tune.chord([array-of-scale-degree-#s])
 
 Returns an array of note values. Like `Tune.note()`, `Tune.chord()` returns values according to the current output mode (`Tune.mode`). 
 
